@@ -1,0 +1,12 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Articles | Desmond Zhao</title><link rel="stylesheet" href="/style.css"></head>
+<body><div class="wrap"><nav><a class="brand" href="/">Desmond Zhao</a><a href="/">About</a><a href="/articles/" class="on">Articles</a></nav>
+<h1>Articles</h1><p class="meta">一些想法和记录 · Thoughts &amp; notes</p>
+<div class="list" id="list"></div><p class="empty" id="empty" style="display:none">第一篇文章正在路上。</p>
+<footer>© Desmond Zhao</footer></div>
+<script>
+fetch('/articles.json').then(r=>r.json()).then(a=>{
+  a.sort((x,y)=>y.date.localeCompare(x.date));
+  if(!a.length){document.getElementById('empty').style.display='block';return}
+  document.getElementById('list').innerHTML=a.map(p=>'<a class="item" href="/articles/'+p.slug+'.html"><div class="t">'+p.title+'</div><div class="meta">'+p.date+'</div><div class="s">'+(p.summary||'')+'</div></a>').join('');
+});
+</script></body></html>
